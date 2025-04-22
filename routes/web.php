@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Livewire\Actors;
+use App\Livewire\People;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,3 +22,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/actors', Actors::class)->name('actors');
+Route::get('/people', People::class)->name('people');
