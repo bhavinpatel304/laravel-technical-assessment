@@ -15,7 +15,12 @@ class People extends Component
     public $apiUrl = 'https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=';
     
     public function searchPeople()
-    {        
+    {   
+        $this->validate([
+            'search' => 'required|min:3',
+        ]);
+        session()->flash('message', 'Name accepted: ' . $this->search);
+
         if(!empty($this->search))
         {
             $response = Http::get($this->apiUrl.$this->search);
@@ -30,11 +35,6 @@ class People extends Component
         }
     }
     
-    public function mount()
-    {
-        $this->searchPeople();     
-    }
-
     public function render()
     {   
         return view('livewire.people')->layout('layouts.app');
